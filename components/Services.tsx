@@ -1,6 +1,7 @@
 'use client'
 
 import { motion } from 'framer-motion'
+import Link from 'next/link'
 import { Droplets, Sparkles, Home, Shield } from 'lucide-react'
 import { siteConfig } from '@/data/config'
 
@@ -12,6 +13,13 @@ const iconMap = {
 }
 
 export default function Services() {
+  const serviceLinks: { [key: string]: string } = {
+    'Soft Washing': '/soft-washing',
+    'Roof Cleaning': '/roof-cleaning',
+    'Driveways, Patios & Decking': '/driveways-patio-decking',
+    'Gutter Cleaning': '/gutters',
+  }
+
   return (
     <section id="services" className="section-padding bg-black">
       <div className="container-custom">
@@ -33,32 +41,34 @@ export default function Services() {
         <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
           {siteConfig.services.map((service, index) => {
             const Icon = iconMap[service.icon as keyof typeof iconMap]
+            const serviceLink = serviceLinks[service.title] || '/services'
             
             return (
-              <motion.div
-                key={service.id}
-                initial={{ opacity: 0, y: 30 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ delay: index * 0.1, duration: 0.6 }}
-                className="group relative bg-slate-900 border-2 border-slate-800 rounded-2xl p-8 hover:border-tr1-blue hover:shadow-xl transition-all duration-300"
-              >
-                <div className="absolute inset-0 bg-gradient-to-br from-tr1-blue/10 to-transparent opacity-0 group-hover:opacity-100 rounded-2xl transition-opacity duration-300" />
-                
-                <div className="relative">
-                  <div className="w-14 h-14 bg-tr1-blue/20 rounded-xl flex items-center justify-center mb-6 group-hover:bg-tr1-blue transition-colors duration-300">
-                    <Icon className="w-7 h-7 text-tr1-blue group-hover:text-white transition-colors duration-300" />
+              <Link key={service.id} href={serviceLink}>
+                <motion.div
+                  initial={{ opacity: 0, y: 30 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  viewport={{ once: true }}
+                  transition={{ delay: index * 0.1, duration: 0.6 }}
+                  className="group relative bg-slate-900 border-2 border-slate-800 rounded-2xl p-8 hover:border-tr1-blue hover:shadow-xl transition-all duration-300 cursor-pointer"
+                >
+                  <div className="absolute inset-0 bg-gradient-to-br from-tr1-blue/10 to-transparent opacity-0 group-hover:opacity-100 rounded-2xl transition-opacity duration-300" />
+                  
+                  <div className="relative">
+                    <div className="w-14 h-14 bg-tr1-blue/20 rounded-xl flex items-center justify-center mb-6 group-hover:bg-tr1-blue transition-colors duration-300">
+                      <Icon className="w-7 h-7 text-tr1-blue group-hover:text-white transition-colors duration-300" />
+                    </div>
+                    
+                    <h3 className="text-2xl font-bold text-white mb-3">
+                      {service.title}
+                    </h3>
+                    
+                    <p className="text-slate-400 leading-relaxed">
+                      {service.description}
+                    </p>
                   </div>
-                  
-                  <h3 className="text-2xl font-bold text-white mb-3">
-                    {service.title}
-                  </h3>
-                  
-                  <p className="text-slate-400 leading-relaxed">
-                    {service.description}
-                  </p>
-                </div>
-              </motion.div>
+                </motion.div>
+              </Link>
             )
           })}
         </div>

@@ -8,9 +8,6 @@ import Image from "next/image";
 import { motion } from "framer-motion";
 
 const navItems = {
-  "/": {
-    name: "home",
-  },
   "/roof-cleaning": {
     name: "roof cleaning",
   },
@@ -22,6 +19,9 @@ const navItems = {
   },
   "/gutters": {
     name: "gutters",
+  },
+  "/services": {
+    name: "services",
   },
   "/gallery": {
     name: "gallery",
@@ -43,7 +43,9 @@ export function MorphicNavbar() {
     return activePath.startsWith(path);
   };
 
-  const isHomePage = pathname === '/';
+  const entries = Object.entries(navItems);
+  const leftItems = entries.slice(0, 3);
+  const rightItems = entries.slice(3);
 
   return (
     <motion.nav
@@ -55,36 +57,66 @@ export function MorphicNavbar() {
       <div className="container-custom py-4">
         <div className="flex items-center justify-between">
           <div className="hidden md:flex items-center justify-center flex-1">
-            <div className="glass flex items-center justify-between overflow-hidden rounded-xl bg-slate-900/50 backdrop-blur-md border border-slate-800">
-          {Object.entries(navItems).map(([path, { name }], index, array) => {
-            const isActive = isActiveLink(path);
-            const isFirst = index === 0;
-            const isLast = index === array.length - 1;
-            const prevPath = index > 0 ? array[index - 1][0] : null;
-            const nextPath =
-              index < array.length - 1 ? array[index + 1][0] : null;
+            <div className="glass flex items-center justify-between overflow-visible rounded-xl bg-slate-900/50 backdrop-blur-md border border-slate-800">
+              {leftItems.map(([path, { name }], index) => {
+                const isActive = isActiveLink(path);
+                const isLastLeft = index === leftItems.length - 1;
 
-            return (
+                return (
+                  <Link
+                    className={clsx(
+                      "flex items-center justify-center p-1.5 px-4 text-sm transition-all duration-300",
+                      isLastLeft && "mr-10",
+                      isActive
+                        ? "mx-2 rounded-xl font-semibold bg-tr1-blue text-white shadow-lg"
+                        : "text-slate-300 hover:text-white hover:bg-slate-800/50"
+                    )}
+                    href={path}
+                    key={path}
+                  >
+                    {name}
+                  </Link>
+                );
+              })}
+
               <Link
-                className={clsx(
-                  "flex items-center justify-center p-1.5 px-4 text-sm transition-all duration-300",
-                  isActive
-                    ? "mx-2 rounded-xl font-semibold bg-tr1-blue text-white shadow-lg"
-                    : clsx(
-                        "text-slate-300 hover:text-white",
-                        (isActiveLink(prevPath || "") || isFirst) &&
-                          "rounded-l-xl",
-                        (isActiveLink(nextPath || "") || isLast) &&
-                          "rounded-r-xl"
-                      )
-                )}
-                href={path}
-                key={path}
+                href="/"
+                aria-label="Home"
+                className="group relative mx-4 flex h-10 w-20 items-center justify-center rounded-xl"
               >
-                {name}
+                <span className="relative h-full w-full">
+                  <span className="pointer-events-none absolute left-1/2 top-1/2 h-10 w-20 -translate-x-1/2 -translate-y-1/2 transition-transform duration-200 scale-[3.5] group-hover:scale-[3.675] origin-center z-10">
+                    <Image
+                      src="/tr1-logo-navbar.png"
+                      alt="TR1 Exterior Cleaning"
+                      fill
+                      className="object-contain"
+                      priority
+                    />
+                  </span>
+                </span>
               </Link>
-            );
-          })}
+
+              {rightItems.map(([path, { name }], index) => {
+                const isActive = isActiveLink(path);
+                const isFirstRight = index === 0;
+
+                return (
+                  <Link
+                    className={clsx(
+                      "flex items-center justify-center p-1.5 px-4 text-sm transition-all duration-300",
+                      isFirstRight && "ml-10",
+                      isActive
+                        ? "mx-2 rounded-xl font-semibold bg-tr1-blue text-white shadow-lg"
+                        : "text-slate-300 hover:text-white hover:bg-slate-800/50"
+                    )}
+                    href={path}
+                    key={path}
+                  >
+                    {name}
+                  </Link>
+                );
+              })}
             </div>
           </div>
 
@@ -95,7 +127,7 @@ export function MorphicNavbar() {
             className="hidden md:block"
           >
             <Link
-              href="/#contact"
+              href="/contact"
               className="inline-flex items-center justify-center px-6 py-3 bg-tr1-blue text-white font-semibold rounded-lg hover:bg-blue-600 transition-all duration-200 shadow-lg hover:shadow-xl hover:scale-105"
             >
               Get a Quote
@@ -104,7 +136,7 @@ export function MorphicNavbar() {
 
           <div className="md:hidden flex items-center gap-4">
             <Link
-              href="/#contact"
+              href="/contact"
               className="inline-flex items-center justify-center px-4 py-2 bg-tr1-blue text-white text-sm font-semibold rounded-lg hover:bg-blue-600 transition-all duration-200"
             >
               Quote
@@ -114,6 +146,21 @@ export function MorphicNavbar() {
 
         <div className="md:hidden mt-4">
           <div className="glass flex flex-wrap items-center justify-center gap-2 p-2 rounded-xl bg-slate-900/50 backdrop-blur-md border border-slate-800">
+            <Link
+              href="/"
+              aria-label="Home"
+              className="flex items-center justify-center px-3 py-1.5 rounded-lg transition-transform duration-200 bg-slate-800 hover:scale-110"
+            >
+              <span className="relative h-6 w-14">
+                <Image
+                  src="/tr1-logo-navbar.png"
+                  alt="TR1 Exterior Cleaning"
+                  fill
+                  className="object-contain"
+                  priority
+                />
+              </span>
+            </Link>
             {Object.entries(navItems).map(([path, { name }]) => {
               const isActive = isActiveLink(path);
 
