@@ -1,0 +1,15 @@
+version: '3.8'
+
+services:
+  tr1-website:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    ports:
+      - "1000:1000"
+    environment:
+      - NODE_ENV=production
+      - PORT=1000
+      - HOSTNAME=0.0.0.0
+    restart: unless-stopped
+    container_name: tr1-exterior-cleaning
