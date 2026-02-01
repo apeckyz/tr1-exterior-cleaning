@@ -7,7 +7,7 @@ export const DistortedGlass = ({ className }: { className?: string }) => {
     <>
       <div
         className={cn(
-          "relative hidden h-[50px] w-[360px] overflow-hidden rounded-b-2xl lg:w-[600px]  xl:block xl:w-full",
+          "relative h-[50px] w-full overflow-hidden rounded-b-2xl",
           className
         )}
       >
