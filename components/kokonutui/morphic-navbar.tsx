@@ -6,6 +6,7 @@ import { useState, useEffect } from "react";
 import { usePathname } from "next/navigation";
 import Image from "next/image";
 import { motion } from "framer-motion";
+import { DistortedGlass } from "@/components/ui/distorted-glass";
 
 const navItems = {
   "/roof-cleaning": {
@@ -52,12 +53,17 @@ export function MorphicNavbar() {
       initial={{ y: -100 }}
       animate={{ y: 0 }}
       transition={{ duration: 0.3, ease: "easeOut" }}
-      className="fixed top-0 left-0 right-0 z-50 bg-black/95 backdrop-blur-sm"
+      className="fixed top-0 left-0 right-0 z-50"
     >
-      <div className="container-custom py-4">
+      {/* Distorted Glass Effect - positioned as background */}
+      <div className="absolute inset-0 z-0">
+        <DistortedGlass className="!h-full !w-full rounded-none" />
+      </div>
+      
+      <div className="relative z-10 container-custom py-4">
         <div className="flex items-center justify-between">
           <div className="hidden md:flex items-center justify-center flex-1">
-            <div className="glass flex items-center justify-between overflow-visible rounded-xl bg-slate-900/50 backdrop-blur-md border border-slate-800">
+            <div className="flex items-center justify-between overflow-visible">
               {leftItems.map(([path, { name }], index) => {
                 const isActive = isActiveLink(path);
                 const isLastLeft = index === leftItems.length - 1;
@@ -145,7 +151,7 @@ export function MorphicNavbar() {
         </div>
 
         <div className="md:hidden mt-4">
-          <div className="glass flex flex-wrap items-center justify-center gap-2 p-2 rounded-xl bg-slate-900/50 backdrop-blur-md border border-slate-800">
+          <div className="flex flex-wrap items-center justify-center gap-2 p-2">
             <Link
               href="/"
               aria-label="Home"

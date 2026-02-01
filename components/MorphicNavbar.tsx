@@ -6,6 +6,7 @@ import { useState, useEffect } from "react";
 import { usePathname } from "next/navigation";
 import Image from "next/image";
 import { motion } from "framer-motion";
+import { DistortedGlass } from "@/components/ui/distorted-glass";
 
 const navItems = {
   "/": {
@@ -48,9 +49,10 @@ export function MorphicNavbar() {
       initial={{ y: -100 }}
       animate={{ y: 0 }}
       transition={{ duration: 0.6, ease: "easeOut" }}
-      className="fixed top-0 left-0 right-0 z-50 bg-black/95 backdrop-blur-sm"
+      className="fixed top-0 left-0 right-0 z-50"
     >
-      <div className="container-custom py-4">
+      <div className="bg-black/95 backdrop-blur-md border-b border-slate-800/50">
+        <div className="container-custom py-4">
         <div className="flex items-center justify-between">
           <motion.div
             initial={{ opacity: 0, x: -20 }}
@@ -148,6 +150,12 @@ export function MorphicNavbar() {
               );
             })}
           </div>
+        </div>
+        </div>
+        
+        {/* Distorted Glass Effect */}
+        <div className="relative w-full -mt-[17px] text-slate-400">
+          <DistortedGlass />
         </div>
       </div>
     </motion.nav>

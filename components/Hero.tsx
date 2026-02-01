@@ -5,13 +5,24 @@ import Image from 'next/image'
 import { motion } from 'framer-motion'
 import { ArrowRight, Play } from 'lucide-react'
 import { siteConfig } from '@/data/config'
+import RainGrid from './RainGrid'
 
 export default function Hero() {
   return (
     <section className="relative min-h-screen flex items-center justify-center overflow-hidden bg-black">
-      <div className="absolute inset-0 bg-grid-slate-900 [mask-image:linear-gradient(0deg,#000000,rgba(0,0,0,0.6))] -z-10" />
+      {/* Interactive RainGrid Background - Fixed behind content */}
+      <div className="absolute inset-0 z-0">
+        <RainGrid 
+          backgroundColor="#000000"
+          gridColor="rgba(125, 211, 252, 0.15)"
+          rainColor="rgba(200, 230, 255, 0.7)"
+          particleCount={120}
+          repelRadius={120}
+          repelStrength={0.5}
+        />
+      </div>
       
-      <div className="container-custom pt-32 pb-20">
+      <div className="relative z-10 container-custom pt-32 pb-20">
         <div className="max-w-6xl mx-auto">
           <motion.div
             initial={{ opacity: 0, y: 30 }}
