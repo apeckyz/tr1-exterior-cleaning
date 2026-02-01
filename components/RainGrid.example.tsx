@@ -86,8 +86,7 @@ export function HighImpactExample() {
       <RainGrid 
         particleCount={200}
         maxDepth={5}
-        cleaningRadius={150}
-        glowIntensity={1.5}
+        repelRadius={150}
         backgroundColor="#0a0f1e"
         gridColor="rgba(125, 211, 252, 0.25)"
         rainColor="rgba(255, 255, 255, 0.8)"
@@ -122,7 +121,7 @@ export function FullHeroExample() {
         gridColor="rgba(125, 211, 252, 0.2)"
         rainColor="rgba(255, 255, 255, 0.6)"
         particleCount={150}
-        cleaningRadius={100}
+        repelRadius={100}
       />
       
       {/* Content Overlay */}
@@ -196,7 +195,7 @@ export function MobileOptimizedExample() {
       <RainGrid 
         particleCount={75}
         maxDepth={3}
-        cleaningRadius={80}
+        repelRadius={80}
         backgroundColor="#0f172a"
       />
       <div className="relative z-10 flex flex-col items-center justify-center min-h-screen px-4 py-12">
@@ -231,8 +230,7 @@ export function SubtleEffectExample() {
         rainColor="rgba(203, 213, 225, 0.4)"
         particleCount={80}
         maxDepth={3}
-        cleaningRadius={120}
-        glowIntensity={0.8}
+        repelRadius={120}
       />
       <div className="relative z-10 flex items-center justify-center h-full">
         <div className="text-center space-y-4">
