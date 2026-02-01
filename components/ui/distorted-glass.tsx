@@ -11,23 +11,23 @@ export const DistortedGlass = ({ className }: { className?: string }) => {
           className
         )}
       >
-        <div className="pointer-events-none absolute inset-0 z-10 size-full overflow-hidden border-b border-white/5">
-          <div className="glass-effect size-full backdrop-blur-md bg-black/40"></div>
+        <div className="pointer-events-none absolute bottom-0 z-10 size-full overflow-hidden border border-[#f5f5f51a]">
+          <div className="glass-effect size-full"></div>
         </div>
-        <svg className="absolute" width="0" height="0">
+        <svg>
           <title>Distorted Glass</title>
           <defs>
             <filter id="fractal-noise-glass">
               <feTurbulence
                 type="fractalNoise"
-                baseFrequency="0.15 0.15"
-                numOctaves="2"
+                baseFrequency="0.12 0.12"
+                numOctaves="1"
                 result="warp"
               ></feTurbulence>
               <feDisplacementMap
                 xChannelSelector="R"
                 yChannelSelector="G"
-                scale="40"
+                scale="30"
                 in="SourceGraphic"
                 in2="warp"
               />
@@ -38,15 +38,16 @@ export const DistortedGlass = ({ className }: { className?: string }) => {
 
       <style jsx>{`
         .glass-effect {
-          background-image: repeating-radial-gradient(
-            circle at 50% 50%,
-            rgba(255, 255, 255, 0.03) 0px,
-            rgba(255, 255, 255, 0.08) 8px,
-            rgba(255, 255, 255, 0.15) 20px,
-            rgba(255, 255, 255, 0.05) 30px
+          background: rgba(0, 0, 0, 0.2);
+          background: repeating-radial-gradient(
+            circle at 50%50%,
+            rgb(255 255 255 / 0),
+            rgba(255, 255, 255, 0.2) 10px,
+            rgb(255 255 255) 31px
           );
           filter: url(#fractal-noise-glass);
-          background-size: 8px 8px;
+          background-size: 6px 6px;
+          backdrop-filter: blur(0px);
         }
       `}</style>
     </>

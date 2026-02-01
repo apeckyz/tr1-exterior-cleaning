@@ -6,7 +6,15 @@ import { useState, useEffect } from "react";
 import { usePathname } from "next/navigation";
 import Image from "next/image";
 import { motion } from "framer-motion";
+import { Menu } from "lucide-react";
 import { DistortedGlass } from "@/components/ui/distorted-glass";
+import {
+  Drawer,
+  DrawerClose,
+  DrawerContent,
+  DrawerTrigger,
+} from "@/components/ui/drawer";
+import { Button } from "@/components/ui/button";
 
 const navItems = {
   "/roof-cleaning": {
@@ -32,6 +40,7 @@ const navItems = {
 export function MorphicNavbar() {
   const pathname = usePathname();
   const [activePath, setActivePath] = useState(pathname);
+  const [isDrawerOpen, setIsDrawerOpen] = useState(false);
 
   useEffect(() => {
     setActivePath(pathname);
@@ -142,58 +151,73 @@ export function MorphicNavbar() {
 
           <div className="md:hidden flex items-center gap-4">
             <Link
-              href="/contact"
-              className="inline-flex items-center justify-center px-4 py-2 bg-tr1-blue text-white text-sm font-semibold rounded-lg hover:bg-blue-600 transition-all duration-200"
+              href="/"
+              aria-label="Home"
+              className="flex items-center justify-center"
             >
-              Quote
+              <span className="relative h-8 w-20">
+                <Image
+                  src="/tr1-logo-navbar.png"
+                  alt="TR1 Exterior Cleaning"
+                  fill
+                  className="object-contain"
+                  priority
+                />
+              </span>
             </Link>
+            <Drawer open={isDrawerOpen} onOpenChange={setIsDrawerOpen}>
+              <DrawerTrigger asChild>
+                <Button
+                  variant="ghost"
+                  size="icon"
+                  className="text-white hover:bg-slate-800/50"
+                >
+                  <Menu className="h-6 w-6" />
+                </Button>
+              </DrawerTrigger>
+              <DrawerContent className="bg-slate-900/95 backdrop-blur-md border-slate-800">
+                <motion.div
+                  initial={{ opacity: 0, y: 20 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ duration: 0.3 }}
+                  className="mx-auto w-full max-w-sm p-6 space-y-6"
+                >
+                  <div className="flex flex-col gap-3">
+                    {Object.entries(navItems).map(([path, { name }]) => {
+                      const isActive = isActiveLink(path);
+                      return (
+                        <DrawerClose asChild key={path}>
+                          <Link
+                            className={clsx(
+                              "flex items-center justify-center px-4 py-3 text-base rounded-lg transition-all duration-300",
+                              isActive
+                                ? "font-semibold bg-tr1-blue text-white shadow-lg"
+                                : "text-slate-300 hover:text-white hover:bg-slate-800/50"
+                            )}
+                            href={path}
+                            onClick={() => setIsDrawerOpen(false)}
+                          >
+                            {name}
+                          </Link>
+                        </DrawerClose>
+                      );
+                    })}
+                  </div>
+                  <DrawerClose asChild>
+                    <Link
+                      href="/contact"
+                      className="inline-flex items-center justify-center w-full px-6 py-3 bg-tr1-blue text-white font-semibold rounded-lg hover:bg-blue-600 transition-all duration-200 shadow-lg"
+                      onClick={() => setIsDrawerOpen(false)}
+                    >
+                      Get a Quote
+                    </Link>
+                  </DrawerClose>
+                </motion.div>
+              </DrawerContent>
+            </Drawer>
           </div>
         </div>
 
-        <div className="md:hidden mt-4">
-          <div className="flex flex-col gap-3">
-            {/* Logo Row */}
-            <div className="flex justify-center">
-              <Link
-                href="/"
-                aria-label="Home"
-                className="flex items-center justify-center transition-transform duration-200 hover:scale-110"
-              >
-                <span className="relative h-8 w-20">
-                  <Image
-                    src="/tr1-logo-navbar.png"
-                    alt="TR1 Exterior Cleaning"
-                    fill
-                    className="object-contain"
-                    priority
-                  />
-                </span>
-              </Link>
-            </div>
-            
-            {/* Navigation Items */}
-            <div className="flex flex-wrap items-center justify-center gap-2">
-              {Object.entries(navItems).map(([path, { name }]) => {
-                const isActive = isActiveLink(path);
-
-                return (
-                  <Link
-                    className={clsx(
-                      "flex items-center justify-center px-3 py-1.5 text-xs rounded-lg transition-all duration-300",
-                      isActive
-                        ? "font-semibold bg-tr1-blue text-white shadow-lg"
-                        : "text-slate-300 hover:text-white hover:bg-slate-800/50"
-                    )}
-                    href={path}
-                    key={path}
-                  >
-                    {name}
-                  </Link>
-                );
-              })}
-            </div>
-          </div>
-        </div>
       </div>
     </motion.nav>
   );
