@@ -60,7 +60,7 @@ export function PerformanceOptimizedExample() {
       <RainGrid 
         particleCount={100}
         maxDepth={3}
-        cleaningRadius={80}
+        repelRadius={80}
       />
       <div className="relative z-10 flex items-center justify-center h-full">
         <div className="max-w-2xl px-6 text-center">
