@@ -151,40 +151,47 @@ export function MorphicNavbar() {
         </div>
 
         <div className="md:hidden mt-4">
-          <div className="flex flex-wrap items-center justify-center gap-2 p-2">
-            <Link
-              href="/"
-              aria-label="Home"
-              className="flex items-center justify-center px-3 py-1.5 rounded-lg transition-transform duration-200 bg-slate-800 hover:scale-110"
-            >
-              <span className="relative h-6 w-14">
-                <Image
-                  src="/tr1-logo-navbar.png"
-                  alt="TR1 Exterior Cleaning"
-                  fill
-                  className="object-contain"
-                  priority
-                />
-              </span>
-            </Link>
-            {Object.entries(navItems).map(([path, { name }]) => {
-              const isActive = isActiveLink(path);
+          <div className="flex flex-col gap-3">
+            {/* Logo Row */}
+            <div className="flex justify-center">
+              <Link
+                href="/"
+                aria-label="Home"
+                className="flex items-center justify-center transition-transform duration-200 hover:scale-110"
+              >
+                <span className="relative h-8 w-20">
+                  <Image
+                    src="/tr1-logo-navbar.png"
+                    alt="TR1 Exterior Cleaning"
+                    fill
+                    className="object-contain"
+                    priority
+                  />
+                </span>
+              </Link>
+            </div>
+            
+            {/* Navigation Items */}
+            <div className="flex flex-wrap items-center justify-center gap-2">
+              {Object.entries(navItems).map(([path, { name }]) => {
+                const isActive = isActiveLink(path);
 
-              return (
-                <Link
-                  className={clsx(
-                    "flex items-center justify-center px-3 py-1.5 text-xs rounded-lg transition-all duration-300",
-                    isActive
-                      ? "font-semibold bg-tr1-blue text-white shadow-lg"
-                      : "text-slate-300 hover:text-white hover:bg-slate-800"
-                  )}
-                  href={path}
-                  key={path}
-                >
-                  {name}
-                </Link>
-              );
-            })}
+                return (
+                  <Link
+                    className={clsx(
+                      "flex items-center justify-center px-3 py-1.5 text-xs rounded-lg transition-all duration-300",
+                      isActive
+                        ? "font-semibold bg-tr1-blue text-white shadow-lg"
+                        : "text-slate-300 hover:text-white hover:bg-slate-800/50"
+                    )}
+                    href={path}
+                    key={path}
+                  >
+                    {name}
+                  </Link>
+                );
+              })}
+            </div>
           </div>
         </div>
       </div>

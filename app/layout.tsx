@@ -11,8 +11,8 @@ const inter = Inter({
 })
 
 export const metadata: Metadata = {
-  title: 'Premium Service Business Template',
-  description: 'A designer-led, premium landing page template for service businesses',
+  title: 'TR1 Exterior Cleaning | Professional Cleaning Services Cornwall',
+  description: 'Professional exterior cleaning services in Cornwall. Specialising in roof cleaning, soft washing, driveway cleaning, patio cleaning, and gutter cleaning.',
   icons: {
     icon: [
       { url: '/favicon/favicon-16x16.png', sizes: '16x16', type: 'image/png' },
@@ -23,8 +23,8 @@ export const metadata: Metadata = {
   },
   manifest: '/favicon/site.webmanifest',
   openGraph: {
-    title: 'Premium Service Business Template',
-    description: 'A designer-led, premium landing page template for service businesses',
+    title: 'TR1 Exterior Cleaning | Professional Cleaning Services Cornwall',
+    description: 'Professional exterior cleaning services in Cornwall. Specialising in roof cleaning, soft washing, driveway cleaning, patio cleaning, and gutter cleaning.',
     type: 'website',
     images: [
       {
@@ -34,8 +34,8 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: 'summary_large_image',
-    title: 'Premium Service Business Template',
-    description: 'A designer-led, premium landing page template for service businesses',
+    title: 'TR1 Exterior Cleaning | Professional Cleaning Services Cornwall',
+    description: 'Professional exterior cleaning services in Cornwall. Specialising in roof cleaning, soft washing, driveway cleaning, patio cleaning, and gutter cleaning.',
     images: ['/tr1.jpg'],
   },
 }
