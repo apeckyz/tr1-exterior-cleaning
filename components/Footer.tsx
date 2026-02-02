@@ -104,11 +104,9 @@ export default function Footer() {
                 const phone = formData.get('phone')
                 const service = formData.get('service')
                 const areaSize = formData.get('area-size')
-                const date = formData.get('booking-date')
-                const time = formData.get('booking-time')
                 const message = formData.get('message')
                 
-                const whatsappMessage = `Hi, I'd like to book a service:%0A%0AName: ${name}%0AEmail: ${email}%0APhone: ${phone}%0AService: ${service}%0AArea Size: ${areaSize}m²%0APreferred Date: ${date}%0APreferred Time: ${time}%0AAdditional Details: ${message}`
+                const whatsappMessage = `Hi, I'd like to book a service:%0A%0AName: ${name}%0AEmail: ${email}%0APhone: ${phone}%0AService: ${service}%0AArea Size: ${areaSize}m²%0AAdditional Details: ${message}`
                 
                 window.open(`https://wa.me/${siteConfig.contact.whatsapp}?text=${whatsappMessage}`, '_blank')
               }}>
@@ -185,41 +183,6 @@ export default function Footer() {
                     placeholder="e.g. 50"
                     min="1"
                   />
-                </div>
-
-                <div className="grid grid-cols-2 gap-4">
-                  <div>
-                    <label htmlFor="booking-date" className="block text-sm font-semibold text-slate-300 mb-2">
-                      Preferred Date
-                    </label>
-                    <input
-                      type="date"
-                      id="booking-date"
-                      name="booking-date"
-                      className="w-full px-4 py-3 bg-black border-2 border-slate-700 rounded-lg focus:border-tr1-blue focus:outline-none transition-colors text-white"
-                      min={new Date().toISOString().split('T')[0]}
-                    />
-                  </div>
-                  <div>
-                    <label htmlFor="booking-time" className="block text-sm font-semibold text-slate-300 mb-2">
-                      Preferred Time
-                    </label>
-                    <select
-                      id="booking-time"
-                      name="booking-time"
-                      className="w-full px-4 py-3 bg-black border-2 border-slate-700 rounded-lg focus:border-tr1-blue focus:outline-none transition-colors text-white"
-                    >
-                      <option value="">Select time...</option>
-                      <option value="09:00">09:00 AM</option>
-                      <option value="10:00">10:00 AM</option>
-                      <option value="11:00">11:00 AM</option>
-                      <option value="12:00">12:00 PM</option>
-                      <option value="13:00">01:00 PM</option>
-                      <option value="14:00">02:00 PM</option>
-                      <option value="15:00">03:00 PM</option>
-                      <option value="16:00">04:00 PM</option>
-                    </select>
-                  </div>
                 </div>
 
                 <div>
